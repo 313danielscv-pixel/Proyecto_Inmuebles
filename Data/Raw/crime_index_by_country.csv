@@ -1,0 +1,134 @@
+Country,Crime Index,Safety Index
+Venezuela,84.36,15.64
+Papua New Guinea,80.04,19.96
+South Africa,77.29,22.71
+Afghanistan,76.97,23.03
+Honduras,76.65,23.35
+Trinidad And Tobago,72.43,27.57
+Brazil,68.31,31.69
+Guyana,68.15,31.85
+El Salvador,67.84,32.16
+Syria,67.42,32.58
+Jamaica,67.2,32.8
+Namibia,66.12,33.88
+Angola,65.74,34.26
+Peru,65.65,34.35
+Puerto Rico,64.75,35.25
+Bangladesh,63.82,36.18
+Nigeria,63.27,36.73
+Bahamas,62.74,37.26
+Libya,62.27,37.73
+Argentina,62.26,37.74
+Kenya,61.73,38.27
+Dominican Republic,61.04,38.96
+Fiji,59.57,40.43
+Zimbabwe,58.86,41.14
+Guatemala,58.59,41.41
+Malaysia,58.55,41.45
+Tanzania,57.8,42.2
+Mongolia,57.47,42.53
+Uganda,56.14,43.86
+Bolivia,56.13,43.87
+Somalia,56.04,43.96
+Costa Rica,55.59,44.41
+Colombia,54.94,45.06
+Kazakhstan,54.81,45.19
+Maldives,54.61,45.39
+Botswana,53.47,46.53
+Mexico,53.31,46.69
+Uruguay,53.02,46.98
+Ecuador,52.66,47.34
+Cambodia,52.18,47.82
+Algeria,50.41,49.59
+Paraguay,49.6,50.4
+Chile,49.6,50.4
+Ethiopia,49.23,50.77
+Morocco,48.97,51.03
+Iran,48.91,51.09
+Ukraine,48.84,51.16
+Ghana,48.64,51.36
+Iraq,48,52
+United States,47.7,52.3
+Sweden,47.43,52.57
+France,47.37,52.63
+Myanmar,46.93,53.07
+Egypt,46.65,53.35
+Vietnam,46.52,53.48
+Mauritius,46.41,53.59
+Panama,46.2,53.8
+Indonesia,46.06,53.94
+Moldova,46.03,53.97
+Ireland,45.68,54.32
+Nicaragua,45.54,54.46
+Belgium,45.29,54.71
+Palestine,45.21,54.79
+United Kingdom,44.54,55.46
+India,44.42,55.58
+Italy,44.24,55.76
+Pakistan,44.18,55.82
+Lebanon,44.07,55.93
+Bosnia And Herzegovina,43.57,56.43
+Zambia,43.22,56.78
+Philippines,42.22,57.78
+New Zealand,42.19,57.81
+Tunisia,41.68,58.32
+Australia,41.67,58.33
+Montenegro,41.56,58.44
+Greece,41.3,58.7
+Jordan,40.83,59.17
+Canada,40.64,59.36
+Russia,40.6,59.4
+Sri Lanka,40.23,59.77
+Thailand,40.01,59.99
+Albania,39.86,60.14
+Turkey,39.5,60.5
+Malta,39.37,60.63
+North Macedonia,38.61,61.39
+Bulgaria,38.55,61.45
+Serbia,37.73,62.27
+Latvia,37.43,62.57
+Nepal,35.61,64.39
+Hungary,35.23,64.77
+Germany,35.14,64.86
+Norway,34.62,65.38
+Kuwait,34.57,65.43
+Lithuania,33.88,66.12
+Poland,33.13,66.87
+Luxembourg,32.75,67.25
+Spain,32.33,67.67
+Azerbaijan,32.12,67.88
+Cyprus,31.57,68.43
+Singapore,31.53,68.47
+China,31.18,68.82
+Israel,30.44,69.56
+Kosovo,30.31,69.69
+Portugal,29.83,70.17
+Slovakia,29.81,70.19
+Cuba,29.02,70.98
+Brunei,28.75,71.25
+Uzbekistan,28.62,71.38
+Romania,27.82,72.18
+South Korea,27.33,72.67
+Netherlands,27.15,72.85
+Bahrain,26.86,73.14
+Saudi Arabia,26.68,73.32
+Denmark,26.09,73.91
+Finland,25.53,74.47
+Czech Republic,25.4,74.6
+Belarus,25.02,74.98
+Croatia,24.67,75.33
+Austria,24.43,75.57
+Iceland,23.7,76.3
+Estonia,23.56,76.44
+Armenia,22.69,77.31
+Rwanda,22.04,77.96
+Japan,21.67,78.33
+Switzerland,21.58,78.42
+Isle Of Man,21.32,78.68
+Slovenia,20.95,79.05
+Hong Kong,20.91,79.09
+Oman,20.62,79.38
+Georgia,20.5,79.5
+United Arab Emirates,15.45,84.55
+Taiwan,15.26,84.74
+Qatar,11.9,88.1
