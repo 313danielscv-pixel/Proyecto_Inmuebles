@@ -1,13 +1,49 @@
 # Proyecto_Inmuebles
 
 # Idea del proyecto
-Analizar el mercado inmobiliario global para identificar qué países y tipos de inmuebles ofrecen mejores oportunidades de compra y alquiler desde un presupuesto de salario español, combinando datos de propiedades con indicadores macroeconómicos y sociales.
+Analizar el mercado inmobiliario global comparado con la ley Española de ocupación a la vivenda ,con la de otros paises para asegurar los posibles riesgos de la inversión para identificar qué países y tipos de inmuebles ofrecen mejores oportunidades de compra y alquiler desde un presupuesto de salario español, combinando datos de propiedades con indicadores macroeconómicos y sociales.
 
 
 # Resumen del pre-procesamiento
 - Dataset principal cargado: 147.536 filas y 28 países únicos.
 - El dataset principal tenía 15 columnas tras añadir `country_norm` antes de la unión.
 - La unión final quedó en 147.536 filas y 38 columnas.
+
+
+# Estado actual (2026-06-29)
+- Dataset operativo para BI: 144.961 filas y 41 columnas.
+- Export listo para Power BI: `proyecto-inmobiliario-global/pre-procesamiento/processed_powerbi_es.csv`.
+- Formato Power BI ES aplicado: separador `;`, decimal `,`, codificación `utf-8-sig`.
+- Columnas geográficas disponibles:
+	- `latitude` / `longitude`: coordenada de país.
+	- `latitud_inmueble` / `longitud_inmueble`: coordenada por ubicación de inmueble (cuando hay resolución específica).
+
+
+# Nueva columna financiera
+- Columna añadida: `entry_price_eur`.
+- Significado: estimación del capital inicial en euros para poder tomar posesión del inmueble.
+- Resumen incluido en una sola cifra por vivienda: entrada + plus de gastos de compra/posesión.
+- Fórmula aplicada:
+	- `entry_price_eur = price_in_Euro_calculo * total_initial_pct_country`
+
+
+# Fuente y criterio de cálculo (entry_price_eur)
+- Esta columna es una estimación orientativa para analítica BI (no asesoría legal/hipotecaria).
+- Se ha usado un porcentaje total por país (`total_initial_pct_country`) que resume:
+	- porcentaje de entrada hipotecaria típico,
+	- más gastos de cierre/compra para llegar a posesión.
+- Referencias utilizadas para construir el criterio:
+	- Global Property Guide (rangos de costes de compra por país): https://www.globalpropertyguide.com/
+	- Banco de España (costes habituales de compraventa/hipoteca en España): https://clientebancario.bde.es/
+	- CFPB - Consumer Financial Protection Bureau (costes de cierre y entrada en EE. UU.): https://www.consumerfinance.gov/
+- Regla de fallback para países sin porcentaje específico en el mapeo: `30%` del precio en euros.
+
+
+# Geocodificación de inmuebles (en curso)
+- Caché incremental: `proyecto-inmobiliario-global/pre-procesamiento/geocode_location_cache.csv`.
+- Snapshot de progreso: 5.940 consultas cacheadas.
+- Resultado actual de la caché: 5.883 `ok` y 57 `not_found`.
+- Se usa reintento automático para rate-limit/timeouts y fallback por coordenada país para mantener tabla completa en Power BI.
 
 
 # Fuentes Kaggle (Markdown)
@@ -64,8 +100,8 @@ Analizar el mercado inmobiliario global para identificar qué países y tipos de
 
 
 # Próximos pasos
-- Limpiar nulos, tipos y duplicados.
-- Revisar outliers y normalizar texto.
-- Generar `processed.csv`.
+- Finalizar geocodificación por ubicación para reducir `not_found`.
+- Consolidar export final de `processed_powerbi_es.csv` tras cerrar la caché.
+- Revisar `not_found` frecuentes y normalizar ubicaciones ambiguas.
 - Hacer el EDA con conclusiones por gráfico.
 - Montar el producto final.
