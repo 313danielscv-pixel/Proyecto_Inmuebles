@@ -8,3 +8,4 @@ openpyxl
 jupyter
 geopy
 streamlit
+streamlit-plotly-events
