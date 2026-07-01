@@ -27,6 +27,30 @@ Analizar el mercado inmobiliario global comparado con la ley Española de ocupac
 	- `entry_price_eur = price_in_Euro_calculo * total_initial_pct_country`
 
 
+# Nueva columna de alquiler estimado
+- Columna añadida: `zone_rental_price` (renombrada desde `rent_building_country_eur_monthly_est`).
+- Significado: estimación del ingreso mensual en euros si el inmueble ya es tuyo y lo alquilas al precio medio de mercado de la zona.
+- Fórmula aplicada:
+
+$$
+\text{rent\_base\_monthly} = \frac{\text{price\_in\_Euro\_calculo} \times 0{,}06}{12}
+$$
+
+$$
+\text{zone\_rental\_price} = \text{mediana}\left(\text{rent\_base\_monthly}\right)_{\text{country},\ \text{apartament\_m2}}
+$$
+
+- Criterio de cálculo:
+	- Se asume un yield bruto anual de referencia del **6%** sobre el precio de compra.
+	- El valor por fila es la **mediana del grupo** (`country` + `apartament_m2`) para reflejar el precio medio de la zona, no el valor individual.
+	- Fallback: si el grupo no tiene valores suficientes, se usa la mediana por país.
+- Formato visual: igual que `price_in_Euro` — separador de miles con `.`, decimales con `,` y símbolo `€` (ej: `1.395 €`, `876,53 €`).
+- Uso recomendado en BI:
+	- Ver cuánto generaría mensualmente el inmueble si se alquila.
+	- Comparar precio de compra vs renta estimada.
+	- Construir indicadores de rentabilidad (yield bruto, payback aproximado).
+
+
 # Fuente y criterio de cálculo (entry_price_eur)
 - Esta columna es una estimación orientativa para analítica BI (no asesoría legal/hipotecaria).
 - Se ha usado un porcentaje total por país (`total_initial_pct_country`) que resume:
@@ -105,3 +129,119 @@ Analizar el mercado inmobiliario global comparado con la ley Española de ocupac
 - Revisar `not_found` frecuentes y normalizar ubicaciones ambiguas.
 - Hacer el EDA con conclusiones por gráfico.
 - Montar el producto final.
+
+
+
+## Objetivo de esta sesión
+- Corregir recomendaciones globales para mostrar Top 20 (1 mejor inmueble por país).
+- Mantener mapa + tarjetas finales como salida principal.
+- Eliminar UAE de la selección forzada.
+- Forzar presencia de España en posición 3.
+
+## Problema detectado
+- El notebook acumuló múltiples celdas de prueba y versiones intermedias.
+- Hay duplicación de bloques (Top 5, búsquedas de URLs, versiones de tarjetas y versiones de Top 20).
+- La celda activa de Top 20 todavía contiene lógica antigua con `paises_forzados = ['Spain', 'UAE']`.
+
+## Estado técnico actual
+- Archivo en uso: `proyecto-inmobiliario-global/procesamiento/procesamiento_ideas.ipynb`.
+- Variables base funcionando:
+	- `df` cargado desde `processed_powerbi_es.csv`.
+	- `work` con `score_oportunidad` calculado.
+- Visualización final existente:
+	- Celda de tarjetas/mapa Top 20 usa `top20_global`.
+- Bloque pendiente de corrección:
+	- La generación de `top20_global` sigue incluyendo UAE.
+
+## Lógica final acordada (objetivo)
+1. Construir `top_por_pais` (mejor inmueble por país por score).
+2. Excluir solo España del ranking natural.
+3. Tomar top 2 natural (`top_2`).
+4. Insertar España en posición 3.
+5. Completar hasta 20 con el resto.
+
+Resultado esperado de ranking:
+- #1 Georgia (score alto natural)
+- #2 Austria (score alto natural)
+- #3 Spain (forzado)
+- UAE fuera del Top 20 forzado
+
+## Alcance que se quiere dejar en el notebook
+- Mantener:
+	- Carga de datos
+	- Cálculo de score
+	- Top 20 global (limpio)
+	- Mapa + tarjetas finales
+- Sacar o ignorar para flujo principal:
+	- Celdas antiguas de Top 5
+	- Celdas de scraping/búsquedas de reemplazo de URL
+	- Bloques duplicados de tarjetas
+
+## Checklist para retomar (pendiente inmediato)
+- [ ] Reescribir celda Top 20 para quitar UAE y forzar España en #3.
+- [ ] Ejecutar en orden: carga -> score -> Top 20 -> mapa/tarjetas.
+- [ ] Verificar visualmente que UAE no aparezca y España esté en #3.
+- [ ] Confirmar que el mapa y tarjetas usen exactamente ese `top20_global`.
+
+
+## Estado aplicado (2026-07-01)
+- ✅ Celda Top 20 final aplicada y ejecutada con estas reglas:
+	- Excluir `UAE`.
+	- Forzar `Spain` en posición #3.
+	- Filtrar rentabilidad mínima: `rent_eur_month_num >= 1000`.
+	- Filtrar eficiencia: `payback_years <= 20`.
+- ✅ Celda de mapa + tarjetas finales aplicada y ejecutada sobre `top20_global`.
+- ✅ Se confirma el caso de negocio que pediste: evitar oportunidades de poca renta (ej. ~200/mes).
+
+
+## Power BI (entrega final en 2 páginas)
+
+### ¿Hace falta Power Query?
+- Sí, recomendable para limpiar y tipar columnas (precio, renta, payback, coordenadas) antes de visuales.
+- No hace falta descargar nada externo obligatorio para arrancar.
+
+### Fuente recomendada para el reporte
+- Usar `proyecto-inmobiliario-global/pre-procesamiento/processed_powerbi_es.csv`.
+- Si quieres exactamente el Top 20 filtrado final del notebook, exportar también una tabla final desde notebook (sugerido nombre: `top20_global_final.csv`).
+
+### Página 1 (Resumen Ejecutivo)
+- KPI Cards:
+	- Total inmuebles válidos
+	- Renta media mensual
+	- Payback medio
+	- Score medio
+- Tabla ranking Top 20:
+	- `country`, `location`, `price_in_Euro`, `zone_rental_price`, `score_oportunidad`, `payback_years`
+- Barras por país:
+	- Eje X: país
+	- Eje Y: score_oportunidad (o renta media)
+	- Tooltip: precio, renta, payback
+
+### Página 2 (Mapa interactivo)
+- Visual mapa (Azure Maps o ArcGIS Maps for Power BI):
+	- Latitud: `latitude`
+	- Longitud: `longitude`
+	- Tamaño punto: `score_oportunidad`
+	- Color punto: `payback_years` (menor mejor)
+- Capa heatmap / densidad:
+	- Activar capa de densidad para concentraciones de oportunidad.
+- Segmentadores (slicers):
+	- País
+	- Rango de renta mensual (`>= 1000`)
+	- Rango de payback (`<= 20`)
+
+### Medidas DAX recomendadas
+```DAX
+Renta Mensual Num = VALUE(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE([zone_rental_price], "€", ""), ".", ""), ",", "."))
+
+Precio Num = VALUE(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE([price_in_Euro], "€", ""), ".", ""), ",", "."))
+
+Payback Years = DIVIDE([Precio Num], [Renta Mensual Num] * 12)
+
+Es Rentable = IF([Renta Mensual Num] >= 1000 && [Payback Years] <= 20, 1, 0)
+```
+
+### Filtros finales del reporte
+- Filtro de página: `Es Rentable = 1`
+- Excluir país: `country <> "UAE"`
+- Si quieres fijar España #3 en la tabla visual, usar orden personalizado (columna ranking calculada en Power Query o DAX).

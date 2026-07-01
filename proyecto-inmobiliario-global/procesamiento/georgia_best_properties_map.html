@@ -1,0 +1,1278 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_3b05846e82c4232a6b443695d2ed9e0a {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+
+            <style>html, body {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            </style>
+
+            <style>#map {
+                position:absolute;
+                top:0;
+                bottom:0;
+                right:0;
+                left:0;
+                }
+            </style>
+
+            <script>
+                L_NO_TOUCH = false;
+                L_DISABLE_3D = false;
+            </script>
+
+        
+</head>
+<body>
+    
+    
+<div style="position: fixed; 
+     bottom: 50px; right: 50px; width: 200px; height: 220px; 
+     background-color: white; border:2px solid grey; z-index:9999; 
+     font-size:14px; padding: 10px; border-radius: 5px;">
+
+<p style="margin: 0 0 10px 0; font-weight: bold;">Score de Oportunidad</p>
+
+<p style="margin: 5px 0;"><i style="background:#00AA00; width:15px; height:15px; 
+    border-radius:50%; display:inline-block;"></i> 90-100 (Excelente)</p>
+
+<p style="margin: 5px 0;"><i style="background:#00FF00; width:15px; height:15px; 
+    border-radius:50%; display:inline-block;"></i> 80-90 (Muy bueno)</p>
+
+<p style="margin: 5px 0;"><i style="background:#FFFF00; width:15px; height:15px; 
+    border-radius:50%; display:inline-block;"></i> 70-80 (Bueno)</p>
+
+<p style="margin: 5px 0;"><i style="background:#FF8800; width:15px; height:15px; 
+    border-radius:50%; display:inline-block;"></i> 60-70 (Regular)</p>
+
+<p style="margin: 5px 0;"><i style="background:#FF0000; width:15px; height:15px; 
+    border-radius:50%; display:inline-block;"></i> < 60 (Bajo)</p>
+
+<p style="margin: 10px 0 0 0; font-size: 12px; color: gray;">
+Tamaño = Magnitud del score
+</p>
+</div>
+    
+            <div class="folium-map" id="map_3b05846e82c4232a6b443695d2ed9e0a" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_3b05846e82c4232a6b443695d2ed9e0a = L.map(
+                "map_3b05846e82c4232a6b443695d2ed9e0a",
+                {
+                    center: [41.7151, 44.8271],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 7,
+  "zoomControl": true,
+  "preferCanvas": false,
+}
+
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_5e9873ac3e95be170a8be7fcf6a5e2c6 = L.tileLayer(
+                "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 19,
+  "maxNativeZoom": 19,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors",
+  "subdomains": "abc",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_5e9873ac3e95be170a8be7fcf6a5e2c6.addTo(map_3b05846e82c4232a6b443695d2ed9e0a);
+        
+    
+            var circle_marker_bdf6b355ce38cd5946ea1d5cb3ba6811 = L.circleMarker(
+                [42.315407, 43.356892],
+                {"bubblingMouseEvents": true, "color": "#00AA00", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#00AA00", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.9, "radius": 10.763841887209564, "stroke": true, "weight": 2}
+            ).addTo(map_3b05846e82c4232a6b443695d2ed9e0a);
+        
+    
+        var popup_f856330ad37a884a248160cac47778dd = L.popup({
+  "maxWidth": 280,
+});
+
+        
+            
+                var html_f0611c7893b105ed9a8350efa463fb7e = $(`<div id="html_f0611c7893b105ed9a8350efa463fb7e" style="width: 100.0%; height: 100.0%;">     <b>Abkhazia, Batumi</b><br>     Score: 95.28 / 100<br>     Precio: €18,135<br>     Riesgo: bajo<br>     <a href="https://realting.com/property-for-sale/georgia/atlas-property/1696476" target="_blank">Ver propiedad →</a>     </div>`)[0];
+                popup_f856330ad37a884a248160cac47778dd.setContent(html_f0611c7893b105ed9a8350efa463fb7e);
+            
+        
+
+        circle_marker_bdf6b355ce38cd5946ea1d5cb3ba6811.bindPopup(popup_f856330ad37a884a248160cac47778dd)
+        ;
+
+        
+    
+    
+            var circle_marker_05aac389d16c90c44320071c58e173f4 = L.circleMarker(
+                [42.315407, 43.356892],
+                {"bubblingMouseEvents": true, "color": "#00AA00", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#00AA00", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.9, "radius": 10.76378960446658, "stroke": true, "weight": 2}
+            ).addTo(map_3b05846e82c4232a6b443695d2ed9e0a);
+        
+    
+        var popup_840889db12f65f7f0cbfd75c70354eac = L.popup({
+  "maxWidth": 280,
+});
+
+        
+            
+                var html_153d4dc0ab5f583acc396053c7752659 = $(`<div id="html_153d4dc0ab5f583acc396053c7752659" style="width: 100.0%; height: 100.0%;">     <b>Abkhazia, Batumi</b><br>     Score: 95.28 / 100<br>     Precio: €18,879<br>     Riesgo: bajo<br>     <a href="https://realting.com/property-for-sale/georgia/atlas-property/1765808" target="_blank">Ver propiedad →</a>     </div>`)[0];
+                popup_840889db12f65f7f0cbfd75c70354eac.setContent(html_153d4dc0ab5f583acc396053c7752659);
+            
+        
+
+        circle_marker_05aac389d16c90c44320071c58e173f4.bindPopup(popup_840889db12f65f7f0cbfd75c70354eac)
+        ;
+
+        
+    
+    
+            var circle_marker_44d8cbacd6d9f7e6713fafc9e5a12518 = L.circleMarker(
+                [42.315407, 43.356892],
+                {"bubblingMouseEvents": true, "color": "#00AA00", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#00AA00", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.9, "radius": 10.763776533780835, "stroke": true, "weight": 2}
+            ).addTo(map_3b05846e82c4232a6b443695d2ed9e0a);
+        
+    
+        var popup_982a76e8cedd9877a23088a83c70d756 = L.popup({
+  "maxWidth": 280,
+});
+
+        
+            
+                var html_5ee4ff9834c65be9d35ba232911880f3 = $(`<div id="html_5ee4ff9834c65be9d35ba232911880f3" style="width: 100.0%; height: 100.0%;">     <b>Abkhazia, Batumi</b><br>     Score: 95.28 / 100<br>     Precio: €19,065<br>     Riesgo: bajo<br>     <a href="https://realting.com/property-for-sale/georgia/oda-property/1494976" target="_blank">Ver propiedad →</a>     </div>`)[0];
+                popup_982a76e8cedd9877a23088a83c70d756.setContent(html_5ee4ff9834c65be9d35ba232911880f3);
+            
+        
+
+        circle_marker_44d8cbacd6d9f7e6713fafc9e5a12518.bindPopup(popup_982a76e8cedd9877a23088a83c70d756)
+        ;
+
+        
+    
+    
+            var circle_marker_7da94997a7762ee2239ebdaff92337a8 = L.circleMarker(
+                [42.315407, 43.356892],
+                {"bubblingMouseEvents": true, "color": "#00AA00", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#00AA00", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.9, "radius": 10.763773919643686, "stroke": true, "weight": 2}
+            ).addTo(map_3b05846e82c4232a6b443695d2ed9e0a);
+        
+    
+        var popup_dcf22c3620517bd45f3db7702c309c08 = L.popup({
+  "maxWidth": 280,
+});
+
+        
+            
+                var html_cd4c29b71592ae78ac8db695c9c97013 = $(`<div id="html_cd4c29b71592ae78ac8db695c9c97013" style="width: 100.0%; height: 100.0%;">     <b>Abkhazia, Batumi</b><br>     Score: 95.28 / 100<br>     Precio: €19,102<br>     Riesgo: bajo<br>     <a href="https://realting.com/property-for-sale/georgia/atlas-property/1686559" target="_blank">Ver propiedad →</a>     </div>`)[0];
+                popup_dcf22c3620517bd45f3db7702c309c08.setContent(html_cd4c29b71592ae78ac8db695c9c97013);
+            
+        
+
+        circle_marker_7da94997a7762ee2239ebdaff92337a8.bindPopup(popup_dcf22c3620517bd45f3db7702c309c08)
+        ;
+
+        
+    
+    
+            var circle_marker_3ffe566ad88ecfdcd9d6cf5a32f2e284 = L.circleMarker(
+                [42.315407, 43.356892],
+                {"bubblingMouseEvents": true, "color": "#00AA00", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#00AA00", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.9, "radius": 10.763766730766525, "stroke": true, "weight": 2}
+            ).addTo(map_3b05846e82c4232a6b443695d2ed9e0a);
+        
+    
+        var popup_f773f6af2c1698c11895aa3512298532 = L.popup({
+  "maxWidth": 280,
+});
+
+        
+            
+                var html_9a2471aa7907970dd8cc3bb0ec571fc6 = $(`<div id="html_9a2471aa7907970dd8cc3bb0ec571fc6" style="width: 100.0%; height: 100.0%;">     <b>Adlia, Abkhazia, Batumi</b><br>     Score: 95.28 / 100<br>     Precio: €19,204<br>     Riesgo: bajo<br>     <a href="https://realting.com/property-for-sale/georgia/avior-estate-group/1673349" target="_blank">Ver propiedad →</a>     </div>`)[0];
+                popup_f773f6af2c1698c11895aa3512298532.setContent(html_9a2471aa7907970dd8cc3bb0ec571fc6);
+            
+        
+
+        circle_marker_3ffe566ad88ecfdcd9d6cf5a32f2e284.bindPopup(popup_f773f6af2c1698c11895aa3512298532)
+        ;
+
+        
+    
+    
+            var circle_marker_91c0c36ddda047dc6cccd43fa45ddf73 = L.circleMarker(
+                [42.315407, 43.356892],
+                {"bubblingMouseEvents": true, "color": "#00AA00", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#00AA00", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.9, "radius": 10.763743857066471, "stroke": true, "weight": 2}
+            ).addTo(map_3b05846e82c4232a6b443695d2ed9e0a);
+        
+    
+        var popup_91c780a77cf9af39ab212805e125eaf2 = L.popup({
+  "maxWidth": 280,
+});
+
+        
+            
+                var html_7af3517b3015976c3268ee9bbf4f51c3 = $(`<div id="html_7af3517b3015976c3268ee9bbf4f51c3" style="width: 100.0%; height: 100.0%;">     <b>nan</b><br>     Score: 95.27 / 100<br>     Precio: €19,530<br>     Riesgo: bajo<br>     <a href="https://realting.com/property-for-sale/georgia/ia-makharadze/1003860" target="_blank">Ver propiedad →</a>     </div>`)[0];
+                popup_91c780a77cf9af39ab212805e125eaf2.setContent(html_7af3517b3015976c3268ee9bbf4f51c3);
+            
+        
+
+        circle_marker_91c0c36ddda047dc6cccd43fa45ddf73.bindPopup(popup_91c780a77cf9af39ab212805e125eaf2)
+        ;
+
+        
+    
+    
+            var circle_marker_01dbcc3c686bbb132cedca0abea66ae1 = L.circleMarker(
+                [42.315407, 43.356892],
+                {"bubblingMouseEvents": true, "color": "#00AA00", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#00AA00", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.9, "radius": 10.763736014655024, "stroke": true, "weight": 2}
+            ).addTo(map_3b05846e82c4232a6b443695d2ed9e0a);
+        
+    
+        var popup_df088f2e4cf174d0d6ce6d73371dd25e = L.popup({
+  "maxWidth": 280,
+});
+
+        
+            
+                var html_3264ac88c4870e24215f1c830c208981 = $(`<div id="html_3264ac88c4870e24215f1c830c208981" style="width: 100.0%; height: 100.0%;">     <b>Abkhazia, Batumi</b><br>     Score: 95.27 / 100<br>     Precio: €19,642<br>     Riesgo: bajo<br>     <a href="https://realting.com/property-for-sale/georgia/atlas-property/1549424" target="_blank">Ver propiedad →</a>     </div>`)[0];
+                popup_df088f2e4cf174d0d6ce6d73371dd25e.setContent(html_3264ac88c4870e24215f1c830c208981);
+            
+        
+
+        circle_marker_01dbcc3c686bbb132cedca0abea66ae1.bindPopup(popup_df088f2e4cf174d0d6ce6d73371dd25e)
+        ;
+
+        
+    
+    
+            var circle_marker_404a9a16b3fa2fbaaae00f6c7f4a65be = L.circleMarker(
+                [42.315407, 43.356892],
+                {"bubblingMouseEvents": true, "color": "#00AA00", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#00AA00", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.9, "radius": 10.763731439915013, "stroke": true, "weight": 2}
+            ).addTo(map_3b05846e82c4232a6b443695d2ed9e0a);
+        
+    
+        var popup_559aa4e0c34e69862c4d703997ce8683 = L.popup({
+  "maxWidth": 280,
+});
+
+        
+            
+                var html_9b69d4248082dbb92b219001013be6bd = $(`<div id="html_9b69d4248082dbb92b219001013be6bd" style="width: 100.0%; height: 100.0%;">     <b>Abkhazia, Batumi</b><br>     Score: 95.27 / 100<br>     Precio: €19,707<br>     Riesgo: bajo<br>     <a href="https://realting.com/property-for-sale/georgia/atlas-property/1761541" target="_blank">Ver propiedad →</a>     </div>`)[0];
+                popup_559aa4e0c34e69862c4d703997ce8683.setContent(html_9b69d4248082dbb92b219001013be6bd);
+            
+        
+
+        circle_marker_404a9a16b3fa2fbaaae00f6c7f4a65be.bindPopup(popup_559aa4e0c34e69862c4d703997ce8683)
+        ;
+
+        
+    
+    
+            var circle_marker_8270f3a9e0593dc9988215583c786127 = L.circleMarker(
+                [42.315407, 43.356892],
+                {"bubblingMouseEvents": true, "color": "#00AA00", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#00AA00", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.9, "radius": 10.763730786380725, "stroke": true, "weight": 2}
+            ).addTo(map_3b05846e82c4232a6b443695d2ed9e0a);
+        
+    
+        var popup_9d3546eb5c3417ca4862199963901a3c = L.popup({
+  "maxWidth": 280,
+});
+
+        
+            
+                var html_d24a0afdafce8effa0ce3846beb7cecc = $(`<div id="html_d24a0afdafce8effa0ce3846beb7cecc" style="width: 100.0%; height: 100.0%;">     <b>Abkhazia, Batumi</b><br>     Score: 95.27 / 100<br>     Precio: €19,716<br>     Riesgo: bajo<br>     <a href="https://realting.com/property-for-sale/georgia/atlas-property/1695136" target="_blank">Ver propiedad →</a>     </div>`)[0];
+                popup_9d3546eb5c3417ca4862199963901a3c.setContent(html_d24a0afdafce8effa0ce3846beb7cecc);
+            
+        
+
+        circle_marker_8270f3a9e0593dc9988215583c786127.bindPopup(popup_9d3546eb5c3417ca4862199963901a3c)
+        ;
+
+        
+    
+    
+            var circle_marker_a99bd70112d0dc176be2d3f0041c0566 = L.circleMarker(
+                [42.315407, 43.356892],
+                {"bubblingMouseEvents": true, "color": "#00AA00", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#00AA00", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.9, "radius": 10.76371869599641, "stroke": true, "weight": 2}
+            ).addTo(map_3b05846e82c4232a6b443695d2ed9e0a);
+        
+    
+        var popup_cc4552b26139ff37842577c85876645e = L.popup({
+  "maxWidth": 280,
+});
+
+        
+            
+                var html_8ebbeae435e1d30b70953e9326298ca9 = $(`<div id="html_8ebbeae435e1d30b70953e9326298ca9" style="width: 100.0%; height: 100.0%;">     <b>Abkhazia, Batumi</b><br>     Score: 95.27 / 100<br>     Precio: €19,888<br>     Riesgo: bajo<br>     <a href="https://realting.com/property-for-sale/georgia/recom/1734886" target="_blank">Ver propiedad →</a>     </div>`)[0];
+                popup_cc4552b26139ff37842577c85876645e.setContent(html_8ebbeae435e1d30b70953e9326298ca9);
+            
+        
+
+        circle_marker_a99bd70112d0dc176be2d3f0041c0566.bindPopup(popup_cc4552b26139ff37842577c85876645e)
+        ;
+
+        
+    
+    
+            var circle_marker_952f6fdfc8dfb4a87d08da50890c9646 = L.circleMarker(
+                [42.315407, 43.356892],
+                {"bubblingMouseEvents": true, "color": "#00AA00", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#00AA00", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.9, "radius": 10.76371869599641, "stroke": true, "weight": 2}
+            ).addTo(map_3b05846e82c4232a6b443695d2ed9e0a);
+        
+    
+        var popup_2545d6d2b7dd0c6649e93583ef5c5720 = L.popup({
+  "maxWidth": 280,
+});
+
+        
+            
+                var html_4d92d619ea210e9b9de5eb16ac7b69f4 = $(`<div id="html_4d92d619ea210e9b9de5eb16ac7b69f4" style="width: 100.0%; height: 100.0%;">     <b>Abkhazia, Batumi</b><br>     Score: 95.27 / 100<br>     Precio: €19,888<br>     Riesgo: bajo<br>     <a href="https://realting.com/property-for-sale/georgia/recom/1754879" target="_blank">Ver propiedad →</a>     </div>`)[0];
+                popup_2545d6d2b7dd0c6649e93583ef5c5720.setContent(html_4d92d619ea210e9b9de5eb16ac7b69f4);
+            
+        
+
+        circle_marker_952f6fdfc8dfb4a87d08da50890c9646.bindPopup(popup_2545d6d2b7dd0c6649e93583ef5c5720)
+        ;
+
+        
+    
+    
+            var circle_marker_8897e091f456f73cd536ef185f984d8c = L.circleMarker(
+                [42.315407, 43.356892],
+                {"bubblingMouseEvents": true, "color": "#00AA00", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#00AA00", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.9, "radius": 10.76371869599641, "stroke": true, "weight": 2}
+            ).addTo(map_3b05846e82c4232a6b443695d2ed9e0a);
+        
+    
+        var popup_9e435b4e67460518ce9f25f378db5fd2 = L.popup({
+  "maxWidth": 280,
+});
+
+        
+            
+                var html_9fd3aa1873c803f45aae6dcd8e2854f3 = $(`<div id="html_9fd3aa1873c803f45aae6dcd8e2854f3" style="width: 100.0%; height: 100.0%;">     <b>Abkhazia, Batumi</b><br>     Score: 95.27 / 100<br>     Precio: €19,888<br>     Riesgo: bajo<br>     <a href="https://realting.com/property-for-sale/georgia/recom/1748495" target="_blank">Ver propiedad →</a>     </div>`)[0];
+                popup_9e435b4e67460518ce9f25f378db5fd2.setContent(html_9fd3aa1873c803f45aae6dcd8e2854f3);
+            
+        
+
+        circle_marker_8897e091f456f73cd536ef185f984d8c.bindPopup(popup_9e435b4e67460518ce9f25f378db5fd2)
+        ;
+
+        
+    
+    
+            var circle_marker_0472d21906c0574eec334f3e01380c76 = L.circleMarker(
+                [42.315407, 43.356892],
+                {"bubblingMouseEvents": true, "color": "#00AA00", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#00AA00", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.9, "radius": 10.76371869599641, "stroke": true, "weight": 2}
+            ).addTo(map_3b05846e82c4232a6b443695d2ed9e0a);
+        
+    
+        var popup_6faa57b82f9a7eb9389bb868fb118949 = L.popup({
+  "maxWidth": 280,
+});
+
+        
+            
+                var html_283b9e8c702a06a834839d0b3e3a357d = $(`<div id="html_283b9e8c702a06a834839d0b3e3a357d" style="width: 100.0%; height: 100.0%;">     <b>Abkhazia, Batumi</b><br>     Score: 95.27 / 100<br>     Precio: €19,888<br>     Riesgo: bajo<br>     <a href="https://realting.com/property-for-sale/georgia/recom/1766806" target="_blank">Ver propiedad →</a>     </div>`)[0];
+                popup_6faa57b82f9a7eb9389bb868fb118949.setContent(html_283b9e8c702a06a834839d0b3e3a357d);
+            
+        
+
+        circle_marker_0472d21906c0574eec334f3e01380c76.bindPopup(popup_6faa57b82f9a7eb9389bb868fb118949)
+        ;
+
+        
+    
+    
+            var circle_marker_b6150658da23b5685b56ec5efbe02ce6 = L.circleMarker(
+                [42.315407, 43.356892],
+                {"bubblingMouseEvents": true, "color": "#00AA00", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#00AA00", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.9, "radius": 10.763714448023542, "stroke": true, "weight": 2}
+            ).addTo(map_3b05846e82c4232a6b443695d2ed9e0a);
+        
+    
+        var popup_1af05795d7792b9f44f61feaced085de = L.popup({
+  "maxWidth": 280,
+});
+
+        
+            
+                var html_910caaf3960d9fd17830b8bdcaebfeac = $(`<div id="html_910caaf3960d9fd17830b8bdcaebfeac" style="width: 100.0%; height: 100.0%;">     <b>Abkhazia, Batumi</b><br>     Score: 95.27 / 100<br>     Precio: €19,948<br>     Riesgo: bajo<br>     <a href="https://realting.com/property-for-sale/georgia/atlas-property/1690006" target="_blank">Ver propiedad →</a>     </div>`)[0];
+                popup_1af05795d7792b9f44f61feaced085de.setContent(html_910caaf3960d9fd17830b8bdcaebfeac);
+            
+        
+
+        circle_marker_b6150658da23b5685b56ec5efbe02ce6.bindPopup(popup_1af05795d7792b9f44f61feaced085de)
+        ;
+
+        
+    
+    
+            var circle_marker_44cc4b8564e4f3cc321e2e16709d4fe3 = L.circleMarker(
+                [42.315407, 43.356892],
+                {"bubblingMouseEvents": true, "color": "#00AA00", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#00AA00", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.9, "radius": 10.763711180352107, "stroke": true, "weight": 2}
+            ).addTo(map_3b05846e82c4232a6b443695d2ed9e0a);
+        
+    
+        var popup_39e5d3794f35aac31f28c345226841bf = L.popup({
+  "maxWidth": 280,
+});
+
+        
+            
+                var html_562a86abe3e874f838caacbf7e8c99fb = $(`<div id="html_562a86abe3e874f838caacbf7e8c99fb" style="width: 100.0%; height: 100.0%;">     <b>Abkhazia, Tbilisi</b><br>     Score: 95.27 / 100<br>     Precio: €19,995<br>     Riesgo: bajo<br>     <a href="https://realting.com/property-for-sale/georgia/ia-makharadze/893443" target="_blank">Ver propiedad →</a>     </div>`)[0];
+                popup_39e5d3794f35aac31f28c345226841bf.setContent(html_562a86abe3e874f838caacbf7e8c99fb);
+            
+        
+
+        circle_marker_44cc4b8564e4f3cc321e2e16709d4fe3.bindPopup(popup_39e5d3794f35aac31f28c345226841bf)
+        ;
+
+        
+    
+    
+            var circle_marker_f1d98c6deef7bad061f7459209ddc2f9 = L.circleMarker(
+                [42.315407, 43.356892],
+                {"bubblingMouseEvents": true, "color": "#00AA00", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#00AA00", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.9, "radius": 10.763709873283533, "stroke": true, "weight": 2}
+            ).addTo(map_3b05846e82c4232a6b443695d2ed9e0a);
+        
+    
+        var popup_c35a26ead5662e8d0f9a9b8fba531953 = L.popup({
+  "maxWidth": 280,
+});
+
+        
+            
+                var html_323c9bba749ee00a2722d072f5efcfab = $(`<div id="html_323c9bba749ee00a2722d072f5efcfab" style="width: 100.0%; height: 100.0%;">     <b>Abkhazia, Batumi</b><br>     Score: 95.27 / 100<br>     Precio: €20,014<br>     Riesgo: bajo<br>     <a href="https://realting.com/property-for-sale/georgia/atlas-property/1686418" target="_blank">Ver propiedad →</a>     </div>`)[0];
+                popup_c35a26ead5662e8d0f9a9b8fba531953.setContent(html_323c9bba749ee00a2722d072f5efcfab);
+            
+        
+
+        circle_marker_f1d98c6deef7bad061f7459209ddc2f9.bindPopup(popup_c35a26ead5662e8d0f9a9b8fba531953)
+        ;
+
+        
+    
+    
+            var circle_marker_4b6519342f057b217939099d61b208bd = L.circleMarker(
+                [42.315407, 43.356892],
+                {"bubblingMouseEvents": true, "color": "#00AA00", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#00AA00", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.9, "radius": 10.763698109666361, "stroke": true, "weight": 2}
+            ).addTo(map_3b05846e82c4232a6b443695d2ed9e0a);
+        
+    
+        var popup_4bfda99ff3b6ec420e7ef543f45992b5 = L.popup({
+  "maxWidth": 280,
+});
+
+        
+            
+                var html_7d36b8f13bec00f1a6ff77cbbe646820 = $(`<div id="html_7d36b8f13bec00f1a6ff77cbbe646820" style="width: 100.0%; height: 100.0%;">     <b>Abkhazia, Batumi</b><br>     Score: 95.27 / 100<br>     Precio: €20,181<br>     Riesgo: bajo<br>     <a href="https://realting.com/property-for-sale/georgia/na-petrovke/317618" target="_blank">Ver propiedad →</a>     </div>`)[0];
+                popup_4bfda99ff3b6ec420e7ef543f45992b5.setContent(html_7d36b8f13bec00f1a6ff77cbbe646820);
+            
+        
+
+        circle_marker_4b6519342f057b217939099d61b208bd.bindPopup(popup_4bfda99ff3b6ec420e7ef543f45992b5)
+        ;
+
+        
+    
+    
+            var circle_marker_56b3dee6da2ec335be390ac4094dc372 = L.circleMarker(
+                [42.315407, 43.356892],
+                {"bubblingMouseEvents": true, "color": "#00AA00", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#00AA00", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.9, "radius": 10.763694841994925, "stroke": true, "weight": 2}
+            ).addTo(map_3b05846e82c4232a6b443695d2ed9e0a);
+        
+    
+        var popup_8c4961d408795849d830659b2e0b38c6 = L.popup({
+  "maxWidth": 280,
+});
+
+        
+            
+                var html_d12173a60d4dda01b5cb2804fb6eb0f9 = $(`<div id="html_d12173a60d4dda01b5cb2804fb6eb0f9" style="width: 100.0%; height: 100.0%;">     <b>Abkhazia, Batumi</b><br>     Score: 95.27 / 100<br>     Precio: €20,228<br>     Riesgo: bajo<br>     <a href="https://realting.com/property-for-sale/georgia/atlas-property/1701399" target="_blank">Ver propiedad →</a>     </div>`)[0];
+                popup_8c4961d408795849d830659b2e0b38c6.setContent(html_d12173a60d4dda01b5cb2804fb6eb0f9);
+            
+        
+
+        circle_marker_56b3dee6da2ec335be390ac4094dc372.bindPopup(popup_8c4961d408795849d830659b2e0b38c6)
+        ;
+
+        
+    
+    
+            var circle_marker_f2a97d8321ebf47bddb84f11cb259459 = L.circleMarker(
+                [42.315407, 43.356892],
+                {"bubblingMouseEvents": true, "color": "#00AA00", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#00AA00", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.9, "radius": 10.76368896018634, "stroke": true, "weight": 2}
+            ).addTo(map_3b05846e82c4232a6b443695d2ed9e0a);
+        
+    
+        var popup_06bd9aeccad363ba46e4428bfd6eb7f7 = L.popup({
+  "maxWidth": 280,
+});
+
+        
+            
+                var html_8b757ef0434371584d4f0a0b64f07cc4 = $(`<div id="html_8b757ef0434371584d4f0a0b64f07cc4" style="width: 100.0%; height: 100.0%;">     <b>Abkhazia, Batumi</b><br>     Score: 95.27 / 100<br>     Precio: €20,311<br>     Riesgo: bajo<br>     <a href="https://realting.com/property-for-sale/georgia/atlas-property/1688318" target="_blank">Ver propiedad →</a>     </div>`)[0];
+                popup_06bd9aeccad363ba46e4428bfd6eb7f7.setContent(html_8b757ef0434371584d4f0a0b64f07cc4);
+            
+        
+
+        circle_marker_f2a97d8321ebf47bddb84f11cb259459.bindPopup(popup_06bd9aeccad363ba46e4428bfd6eb7f7)
+        ;
+
+        
+    
+    
+            var circle_marker_a40f00a9e8a9abea36540c753571a189 = L.circleMarker(
+                [42.315407, 43.356892],
+                {"bubblingMouseEvents": true, "color": "#00AA00", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#00AA00", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.9, "radius": 10.763680464240604, "stroke": true, "weight": 2}
+            ).addTo(map_3b05846e82c4232a6b443695d2ed9e0a);
+        
+    
+        var popup_b964a008b58088abee38c20b2fd2bda9 = L.popup({
+  "maxWidth": 280,
+});
+
+        
+            
+                var html_1227c6c52250beea90748650f8f0e23d = $(`<div id="html_1227c6c52250beea90748650f8f0e23d" style="width: 100.0%; height: 100.0%;">     <b>Abkhazia, Batumi</b><br>     Score: 95.27 / 100<br>     Precio: €20,432<br>     Riesgo: bajo<br>     <a href="https://realting.com/property-for-sale/georgia/atlas-property/1684430" target="_blank">Ver propiedad →</a>     </div>`)[0];
+                popup_b964a008b58088abee38c20b2fd2bda9.setContent(html_1227c6c52250beea90748650f8f0e23d);
+            
+        
+
+        circle_marker_a40f00a9e8a9abea36540c753571a189.bindPopup(popup_b964a008b58088abee38c20b2fd2bda9)
+        ;
+
+        
+    
+    
+            var circle_marker_8e8f9ba9c64e87adc26333bf70286e2a = L.circleMarker(
+                [42.315407, 43.356892],
+                {"bubblingMouseEvents": true, "color": "#00AA00", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#00AA00", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.9, "radius": 10.763678503637742, "stroke": true, "weight": 2}
+            ).addTo(map_3b05846e82c4232a6b443695d2ed9e0a);
+        
+    
+        var popup_bce5d6c8e963240e4472bf8ec84d8642 = L.popup({
+  "maxWidth": 280,
+});
+
+        
+            
+                var html_0580c37dbdff8304b262f2a07bf6dbfa = $(`<div id="html_0580c37dbdff8304b262f2a07bf6dbfa" style="width: 100.0%; height: 100.0%;">     <b>nan</b><br>     Score: 95.27 / 100<br>     Precio: €20,460<br>     Riesgo: bajo<br>     <a href="https://realting.com/property-for-sale/georgia/ia-makharadze/1033044" target="_blank">Ver propiedad →</a>     </div>`)[0];
+                popup_bce5d6c8e963240e4472bf8ec84d8642.setContent(html_0580c37dbdff8304b262f2a07bf6dbfa);
+            
+        
+
+        circle_marker_8e8f9ba9c64e87adc26333bf70286e2a.bindPopup(popup_bce5d6c8e963240e4472bf8ec84d8642)
+        ;
+
+        
+    
+    
+            var circle_marker_ee0a50fbf3a7b4b7c7a97ecde47af175 = L.circleMarker(
+                [42.315407, 43.356892],
+                {"bubblingMouseEvents": true, "color": "#00AA00", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#00AA00", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.9, "radius": 10.763673275363445, "stroke": true, "weight": 2}
+            ).addTo(map_3b05846e82c4232a6b443695d2ed9e0a);
+        
+    
+        var popup_f9db87ecf36585083d6aa503f5501ab4 = L.popup({
+  "maxWidth": 280,
+});
+
+        
+            
+                var html_366c865466956b96e5d026fd446af826 = $(`<div id="html_366c865466956b96e5d026fd446af826" style="width: 100.0%; height: 100.0%;">     <b>Abkhazia, Batumi</b><br>     Score: 95.27 / 100<br>     Precio: €20,534<br>     Riesgo: bajo<br>     <a href="https://realting.com/property-for-sale/georgia/atlas-property/1689971" target="_blank">Ver propiedad →</a>     </div>`)[0];
+                popup_f9db87ecf36585083d6aa503f5501ab4.setContent(html_366c865466956b96e5d026fd446af826);
+            
+        
+
+        circle_marker_ee0a50fbf3a7b4b7c7a97ecde47af175.bindPopup(popup_f9db87ecf36585083d6aa503f5501ab4)
+        ;
+
+        
+    
+    
+            var circle_marker_b69109625e7a015c50f70512961dff78 = L.circleMarker(
+                [42.315407, 43.356892],
+                {"bubblingMouseEvents": true, "color": "#00AA00", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#00AA00", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.9, "radius": 10.76366118497913, "stroke": true, "weight": 2}
+            ).addTo(map_3b05846e82c4232a6b443695d2ed9e0a);
+        
+    
+        var popup_7accd2b5246ba2c63b5f966bd6955470 = L.popup({
+  "maxWidth": 280,
+});
+
+        
+            
+                var html_abd126bcf087d1cb57e744b1321369fb = $(`<div id="html_abd126bcf087d1cb57e744b1321369fb" style="width: 100.0%; height: 100.0%;">     <b>Abkhazia, Batumi</b><br>     Score: 95.27 / 100<br>     Precio: €20,706<br>     Riesgo: bajo<br>     <a href="https://realting.com/property-for-sale/georgia/recom/1765876" target="_blank">Ver propiedad →</a>     </div>`)[0];
+                popup_7accd2b5246ba2c63b5f966bd6955470.setContent(html_abd126bcf087d1cb57e744b1321369fb);
+            
+        
+
+        circle_marker_b69109625e7a015c50f70512961dff78.bindPopup(popup_7accd2b5246ba2c63b5f966bd6955470)
+        ;
+
+        
+    
+    
+            var circle_marker_3066ea04e9398a46972b87663f320038 = L.circleMarker(
+                [42.315407, 43.356892],
+                {"bubblingMouseEvents": true, "color": "#00AA00", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#00AA00", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.9, "radius": 10.76366118497913, "stroke": true, "weight": 2}
+            ).addTo(map_3b05846e82c4232a6b443695d2ed9e0a);
+        
+    
+        var popup_d1a875ddb8be38297b9af97bdda92451 = L.popup({
+  "maxWidth": 280,
+});
+
+        
+            
+                var html_4467fc076b82aa1671daffab5c324b70 = $(`<div id="html_4467fc076b82aa1671daffab5c324b70" style="width: 100.0%; height: 100.0%;">     <b>Abkhazia, Batumi</b><br>     Score: 95.27 / 100<br>     Precio: €20,706<br>     Riesgo: bajo<br>     <a href="https://realting.com/property-for-sale/georgia/recom/1750349" target="_blank">Ver propiedad →</a>     </div>`)[0];
+                popup_d1a875ddb8be38297b9af97bdda92451.setContent(html_4467fc076b82aa1671daffab5c324b70);
+            
+        
+
+        circle_marker_3066ea04e9398a46972b87663f320038.bindPopup(popup_d1a875ddb8be38297b9af97bdda92451)
+        ;
+
+        
+    
+    
+            var circle_marker_9659107325fcb49b535dd138fe621dc2 = L.circleMarker(
+                [42.315407, 43.356892],
+                {"bubblingMouseEvents": true, "color": "#00AA00", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#00AA00", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.9, "radius": 10.763652362266251, "stroke": true, "weight": 2}
+            ).addTo(map_3b05846e82c4232a6b443695d2ed9e0a);
+        
+    
+        var popup_c61d6060eb334086ca3956d2abd958db = L.popup({
+  "maxWidth": 280,
+});
+
+        
+            
+                var html_2486576c2bac134fd0ec8d23d80c9fa3 = $(`<div id="html_2486576c2bac134fd0ec8d23d80c9fa3" style="width: 100.0%; height: 100.0%;">     <b>Abkhazia, Batumi</b><br>     Score: 95.27 / 100<br>     Precio: €20,832<br>     Riesgo: bajo<br>     <a href="https://realting.com/property-for-sale/georgia/atlas-property/1689998" target="_blank">Ver propiedad →</a>     </div>`)[0];
+                popup_c61d6060eb334086ca3956d2abd958db.setContent(html_2486576c2bac134fd0ec8d23d80c9fa3);
+            
+        
+
+        circle_marker_9659107325fcb49b535dd138fe621dc2.bindPopup(popup_c61d6060eb334086ca3956d2abd958db)
+        ;
+
+        
+    
+    
+            var circle_marker_afa74311ec1fac555f438318423650b9 = L.circleMarker(
+                [42.315407, 43.356892],
+                {"bubblingMouseEvents": true, "color": "#00AA00", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#00AA00", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.9, "radius": 10.763645826923378, "stroke": true, "weight": 2}
+            ).addTo(map_3b05846e82c4232a6b443695d2ed9e0a);
+        
+    
+        var popup_71eb6ec7dc9aca9b65a631e0815e8128 = L.popup({
+  "maxWidth": 280,
+});
+
+        
+            
+                var html_1610eeeaf1d9a785a87fcb3af7221d4a = $(`<div id="html_1610eeeaf1d9a785a87fcb3af7221d4a" style="width: 100.0%; height: 100.0%;">     <b>nan</b><br>     Score: 95.27 / 100<br>     Precio: €20,925<br>     Riesgo: bajo<br>     <a href="https://realting.com/property-for-sale/georgia/ia-makharadze/893361" target="_blank">Ver propiedad →</a>     </div>`)[0];
+                popup_71eb6ec7dc9aca9b65a631e0815e8128.setContent(html_1610eeeaf1d9a785a87fcb3af7221d4a);
+            
+        
+
+        circle_marker_afa74311ec1fac555f438318423650b9.bindPopup(popup_71eb6ec7dc9aca9b65a631e0815e8128)
+        ;
+
+        
+    
+    
+            var circle_marker_383a0ffc490d3794070320ea7e3f3b36 = L.circleMarker(
+                [42.315407, 43.356892],
+                {"bubblingMouseEvents": true, "color": "#00AA00", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#00AA00", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.9, "radius": 10.763637330977645, "stroke": true, "weight": 2}
+            ).addTo(map_3b05846e82c4232a6b443695d2ed9e0a);
+        
+    
+        var popup_74096268771f1224a76aef86094cb114 = L.popup({
+  "maxWidth": 280,
+});
+
+        
+            
+                var html_6993dba46d0c7d8e99e3a49116f93cfa = $(`<div id="html_6993dba46d0c7d8e99e3a49116f93cfa" style="width: 100.0%; height: 100.0%;">     <b>Abkhazia, Batumi</b><br>     Score: 95.27 / 100<br>     Precio: €21,046<br>     Riesgo: bajo<br>     <a href="https://realting.com/property-for-sale/georgia/recom/1750350" target="_blank">Ver propiedad →</a>     </div>`)[0];
+                popup_74096268771f1224a76aef86094cb114.setContent(html_6993dba46d0c7d8e99e3a49116f93cfa);
+            
+        
+
+        circle_marker_383a0ffc490d3794070320ea7e3f3b36.bindPopup(popup_74096268771f1224a76aef86094cb114)
+        ;
+
+        
+    
+    
+            var circle_marker_b65891cdbeab7d5481270dc5c088f7d4 = L.circleMarker(
+                [42.315407, 43.356892],
+                {"bubblingMouseEvents": true, "color": "#00AA00", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#00AA00", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.9, "radius": 10.763637330977645, "stroke": true, "weight": 2}
+            ).addTo(map_3b05846e82c4232a6b443695d2ed9e0a);
+        
+    
+        var popup_3bea657fc931b53d67a6d43e5f7f6303 = L.popup({
+  "maxWidth": 280,
+});
+
+        
+            
+                var html_c8e9fbc348d47fe040a0ebd8a0e749af = $(`<div id="html_c8e9fbc348d47fe040a0ebd8a0e749af" style="width: 100.0%; height: 100.0%;">     <b>Abkhazia, Batumi</b><br>     Score: 95.27 / 100<br>     Precio: €21,046<br>     Riesgo: bajo<br>     <a href="https://realting.com/property-for-sale/georgia/recom/1765893" target="_blank">Ver propiedad →</a>     </div>`)[0];
+                popup_3bea657fc931b53d67a6d43e5f7f6303.setContent(html_c8e9fbc348d47fe040a0ebd8a0e749af);
+            
+        
+
+        circle_marker_b65891cdbeab7d5481270dc5c088f7d4.bindPopup(popup_3bea657fc931b53d67a6d43e5f7f6303)
+        ;
+
+        
+    
+    
+            var circle_marker_60609935e68c93327be9dd980bcb9e03 = L.circleMarker(
+                [42.315407, 43.356892],
+                {"bubblingMouseEvents": true, "color": "#00AA00", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#00AA00", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.9, "radius": 10.763633671185636, "stroke": true, "weight": 2}
+            ).addTo(map_3b05846e82c4232a6b443695d2ed9e0a);
+        
+    
+        var popup_b2a3ef0e37d9755d1448865a7fa713c9 = L.popup({
+  "maxWidth": 280,
+});
+
+        
+            
+                var html_d6aca03bb045e9778e3a09407f22cf52 = $(`<div id="html_d6aca03bb045e9778e3a09407f22cf52" style="width: 100.0%; height: 100.0%;">     <b>Abkhazia, Batumi</b><br>     Score: 95.27 / 100<br>     Precio: €21,098<br>     Riesgo: bajo<br>     <a href="https://realting.com/property-for-sale/georgia/atlas-property/1585457" target="_blank">Ver propiedad →</a>     </div>`)[0];
+                popup_b2a3ef0e37d9755d1448865a7fa713c9.setContent(html_d6aca03bb045e9778e3a09407f22cf52);
+            
+        
+
+        circle_marker_60609935e68c93327be9dd980bcb9e03.bindPopup(popup_b2a3ef0e37d9755d1448865a7fa713c9)
+        ;
+
+        
+    
+    
+            var circle_marker_876f50d2de11fc90b09d056d07dc53d5 = L.circleMarker(
+                [42.315407, 43.356892],
+                {"bubblingMouseEvents": true, "color": "#00AA00", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#00AA00", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.9, "radius": 10.763632233410203, "stroke": true, "weight": 2}
+            ).addTo(map_3b05846e82c4232a6b443695d2ed9e0a);
+        
+    
+        var popup_5e836cfe32cd0c7af0b68bc3691c9cfa = L.popup({
+  "maxWidth": 280,
+});
+
+        
+            
+                var html_f8bda5f15dde8a7ed92f6c0dcc2918d9 = $(`<div id="html_f8bda5f15dde8a7ed92f6c0dcc2918d9" style="width: 100.0%; height: 100.0%;">     <b>Abkhazia, Batumi</b><br>     Score: 95.27 / 100<br>     Precio: €21,118<br>     Riesgo: bajo<br>     <a href="https://realting.com/property-for-sale/georgia/recom/1765862" target="_blank">Ver propiedad →</a>     </div>`)[0];
+                popup_5e836cfe32cd0c7af0b68bc3691c9cfa.setContent(html_f8bda5f15dde8a7ed92f6c0dcc2918d9);
+            
+        
+
+        circle_marker_876f50d2de11fc90b09d056d07dc53d5.bindPopup(popup_5e836cfe32cd0c7af0b68bc3691c9cfa)
+        ;
+
+        
+    
+    
+            var circle_marker_ddd556fd6b653b5975f826f38d98c9a5 = L.circleMarker(
+                [42.315407, 43.356892],
+                {"bubblingMouseEvents": true, "color": "#00AA00", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#00AA00", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.9, "radius": 10.763632233410203, "stroke": true, "weight": 2}
+            ).addTo(map_3b05846e82c4232a6b443695d2ed9e0a);
+        
+    
+        var popup_6a4df535296a57704c48c176b7dca490 = L.popup({
+  "maxWidth": 280,
+});
+
+        
+            
+                var html_5fa4f0edf2d6d387ef357ad8652a25bd = $(`<div id="html_5fa4f0edf2d6d387ef357ad8652a25bd" style="width: 100.0%; height: 100.0%;">     <b>Abkhazia, Batumi</b><br>     Score: 95.27 / 100<br>     Precio: €21,118<br>     Riesgo: bajo<br>     <a href="https://realting.com/property-for-sale/georgia/recom/1750336" target="_blank">Ver propiedad →</a>     </div>`)[0];
+                popup_6a4df535296a57704c48c176b7dca490.setContent(html_5fa4f0edf2d6d387ef357ad8652a25bd);
+            
+        
+
+        circle_marker_ddd556fd6b653b5975f826f38d98c9a5.bindPopup(popup_6a4df535296a57704c48c176b7dca490)
+        ;
+
+        
+    
+    
+            var circle_marker_75e2452e567e029bc204e706cfb4a066 = L.circleMarker(
+                [42.315407, 43.356892],
+                {"bubblingMouseEvents": true, "color": "#00AA00", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#00AA00", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.9, "radius": 10.763620992620462, "stroke": true, "weight": 2}
+            ).addTo(map_3b05846e82c4232a6b443695d2ed9e0a);
+        
+    
+        var popup_2b95d0ba9a243814314c405e9826692f = L.popup({
+  "maxWidth": 280,
+});
+
+        
+            
+                var html_59a2365a8c3d5f8f2e3531046610ba3d = $(`<div id="html_59a2365a8c3d5f8f2e3531046610ba3d" style="width: 100.0%; height: 100.0%;">     <b>Abkhazia, Batumi</b><br>     Score: 95.27 / 100<br>     Precio: €21,278<br>     Riesgo: bajo<br>     <a href="https://realting.com/property-for-sale/georgia/atlas-property/1687313" target="_blank">Ver propiedad →</a>     </div>`)[0];
+                popup_2b95d0ba9a243814314c405e9826692f.setContent(html_59a2365a8c3d5f8f2e3531046610ba3d);
+            
+        
+
+        circle_marker_75e2452e567e029bc204e706cfb4a066.bindPopup(popup_2b95d0ba9a243814314c405e9826692f)
+        ;
+
+        
+    
+    
+            var circle_marker_bc0c69dce7752bde624ac3012daae8ab = L.circleMarker(
+                [42.315407, 43.356892],
+                {"bubblingMouseEvents": true, "color": "#00AA00", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#00AA00", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.9, "radius": 10.763614653337875, "stroke": true, "weight": 2}
+            ).addTo(map_3b05846e82c4232a6b443695d2ed9e0a);
+        
+    
+        var popup_810347da4f05177a2f37ac208de33345 = L.popup({
+  "maxWidth": 280,
+});
+
+        
+            
+                var html_8e892bc8ee2d971afa2edc8ed82d3c84 = $(`<div id="html_8e892bc8ee2d971afa2edc8ed82d3c84" style="width: 100.0%; height: 100.0%;">     <b>Adlia, Abkhazia, Batumi</b><br>     Score: 95.27 / 100<br>     Precio: €21,369<br>     Riesgo: bajo<br>     <a href="https://realting.com/property-for-sale/georgia/atlas-property/1741311" target="_blank">Ver propiedad →</a>     </div>`)[0];
+                popup_810347da4f05177a2f37ac208de33345.setContent(html_8e892bc8ee2d971afa2edc8ed82d3c84);
+            
+        
+
+        circle_marker_bc0c69dce7752bde624ac3012daae8ab.bindPopup(popup_810347da4f05177a2f37ac208de33345)
+        ;
+
+        
+    
+    
+            var circle_marker_8fe5ee6514277992ffdae1416936f8af = L.circleMarker(
+                [42.315407, 43.356892],
+                {"bubblingMouseEvents": true, "color": "#00AA00", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#00AA00", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.9, "radius": 10.763613150209014, "stroke": true, "weight": 2}
+            ).addTo(map_3b05846e82c4232a6b443695d2ed9e0a);
+        
+    
+        var popup_619cc8850b51fb81aaa2281444ea93d0 = L.popup({
+  "maxWidth": 280,
+});
+
+        
+            
+                var html_c4ae21cbf70b30a2e625baf7a15fe667 = $(`<div id="html_c4ae21cbf70b30a2e625baf7a15fe667" style="width: 100.0%; height: 100.0%;">     <b>Abkhazia, Batumi</b><br>     Score: 95.27 / 100<br>     Precio: €21,390<br>     Riesgo: bajo<br>     <a href="https://realting.com/property-for-sale/georgia/ilya/1271585" target="_blank">Ver propiedad →</a>     </div>`)[0];
+                popup_619cc8850b51fb81aaa2281444ea93d0.setContent(html_c4ae21cbf70b30a2e625baf7a15fe667);
+            
+        
+
+        circle_marker_8fe5ee6514277992ffdae1416936f8af.bindPopup(popup_619cc8850b51fb81aaa2281444ea93d0)
+        ;
+
+        
+    
+    
+            var circle_marker_819b4e377b71cddf92345010a9275714 = L.circleMarker(
+                [42.315407, 43.356892],
+                {"bubblingMouseEvents": true, "color": "#00AA00", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#00AA00", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.9, "radius": 10.763611973847297, "stroke": true, "weight": 2}
+            ).addTo(map_3b05846e82c4232a6b443695d2ed9e0a);
+        
+    
+        var popup_b4c54dac9a696919caa6e217f9f85978 = L.popup({
+  "maxWidth": 280,
+});
+
+        
+            
+                var html_2472fb7f9c74c9cbb9a67afe87be39b9 = $(`<div id="html_2472fb7f9c74c9cbb9a67afe87be39b9" style="width: 100.0%; height: 100.0%;">     <b>Abkhazia, Batumi</b><br>     Score: 95.27 / 100<br>     Precio: €21,407<br>     Riesgo: bajo<br>     <a href="https://realting.com/property-for-sale/georgia/recom/1765863" target="_blank">Ver propiedad →</a>     </div>`)[0];
+                popup_b4c54dac9a696919caa6e217f9f85978.setContent(html_2472fb7f9c74c9cbb9a67afe87be39b9);
+            
+        
+
+        circle_marker_819b4e377b71cddf92345010a9275714.bindPopup(popup_b4c54dac9a696919caa6e217f9f85978)
+        ;
+
+        
+    
+    
+            var circle_marker_81123851e3e1ab0e1faa762607d97d4f = L.circleMarker(
+                [42.315407, 43.356892],
+                {"bubblingMouseEvents": true, "color": "#00AA00", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#00AA00", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.9, "radius": 10.763611973847297, "stroke": true, "weight": 2}
+            ).addTo(map_3b05846e82c4232a6b443695d2ed9e0a);
+        
+    
+        var popup_1f9643b848157484e1653fd9c5665996 = L.popup({
+  "maxWidth": 280,
+});
+
+        
+            
+                var html_59cb27ca36bf9d0a73f8ffd13c69018c = $(`<div id="html_59cb27ca36bf9d0a73f8ffd13c69018c" style="width: 100.0%; height: 100.0%;">     <b>Abkhazia, Batumi</b><br>     Score: 95.27 / 100<br>     Precio: €21,407<br>     Riesgo: bajo<br>     <a href="https://realting.com/property-for-sale/georgia/recom/1750338" target="_blank">Ver propiedad →</a>     </div>`)[0];
+                popup_1f9643b848157484e1653fd9c5665996.setContent(html_59cb27ca36bf9d0a73f8ffd13c69018c);
+            
+        
+
+        circle_marker_81123851e3e1ab0e1faa762607d97d4f.bindPopup(popup_1f9643b848157484e1653fd9c5665996)
+        ;
+
+        
+    
+    
+            var circle_marker_77a0fa74e18408b907fa6efc449b592b = L.circleMarker(
+                [42.315407, 43.356892],
+                {"bubblingMouseEvents": true, "color": "#00AA00", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#00AA00", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.9, "radius": 10.763609555770433, "stroke": true, "weight": 2}
+            ).addTo(map_3b05846e82c4232a6b443695d2ed9e0a);
+        
+    
+        var popup_b04606afaa21763e256f144f2153dbfe = L.popup({
+  "maxWidth": 280,
+});
+
+        
+            
+                var html_ecd9c9516c2afe6912c86987993ab214 = $(`<div id="html_ecd9c9516c2afe6912c86987993ab214" style="width: 100.0%; height: 100.0%;">     <b>Abkhazia, Batumi</b><br>     Score: 95.27 / 100<br>     Precio: €21,441<br>     Riesgo: bajo<br>     <a href="https://realting.com/property-for-sale/georgia/recom/1765910" target="_blank">Ver propiedad →</a>     </div>`)[0];
+                popup_b04606afaa21763e256f144f2153dbfe.setContent(html_ecd9c9516c2afe6912c86987993ab214);
+            
+        
+
+        circle_marker_77a0fa74e18408b907fa6efc449b592b.bindPopup(popup_b04606afaa21763e256f144f2153dbfe)
+        ;
+
+        
+    
+    
+            var circle_marker_309ad7da4aae769fe8d171727bb500b5 = L.circleMarker(
+                [42.315407, 43.356892],
+                {"bubblingMouseEvents": true, "color": "#00AA00", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#00AA00", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.9, "radius": 10.763606614866141, "stroke": true, "weight": 2}
+            ).addTo(map_3b05846e82c4232a6b443695d2ed9e0a);
+        
+    
+        var popup_671043c2f35ebf3572c2fbf8876a19fe = L.popup({
+  "maxWidth": 280,
+});
+
+        
+            
+                var html_4c4bb90cf5a6deb225697e7e55fdd0ff = $(`<div id="html_4c4bb90cf5a6deb225697e7e55fdd0ff" style="width: 100.0%; height: 100.0%;">     <b>Abkhazia, Batumi</b><br>     Score: 95.27 / 100<br>     Precio: €21,483<br>     Riesgo: bajo<br>     <a href="https://realting.com/property-for-sale/georgia/oda-property/1654895" target="_blank">Ver propiedad →</a>     </div>`)[0];
+                popup_671043c2f35ebf3572c2fbf8876a19fe.setContent(html_4c4bb90cf5a6deb225697e7e55fdd0ff);
+            
+        
+
+        circle_marker_309ad7da4aae769fe8d171727bb500b5.bindPopup(popup_671043c2f35ebf3572c2fbf8876a19fe)
+        ;
+
+        
+    
+    
+            var circle_marker_571c84ab5d2d72c90cc9a0357ac07cd6 = L.circleMarker(
+                [42.315407, 43.356892],
+                {"bubblingMouseEvents": true, "color": "#00AA00", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#00AA00", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.9, "radius": 10.763600079523268, "stroke": true, "weight": 2}
+            ).addTo(map_3b05846e82c4232a6b443695d2ed9e0a);
+        
+    
+        var popup_fb9dc3c46d8158c7db22c2c5daa986ef = L.popup({
+  "maxWidth": 280,
+});
+
+        
+            
+                var html_565d7f8972fb621fbc37db2221a844d3 = $(`<div id="html_565d7f8972fb621fbc37db2221a844d3" style="width: 100.0%; height: 100.0%;">     <b>Abkhazia, Batumi</b><br>     Score: 95.27 / 100<br>     Precio: €21,576<br>     Riesgo: bajo<br>     <a href="https://realting.com/property-for-sale/georgia/atlas-property/1688943" target="_blank">Ver propiedad →</a>     </div>`)[0];
+                popup_fb9dc3c46d8158c7db22c2c5daa986ef.setContent(html_565d7f8972fb621fbc37db2221a844d3);
+            
+        
+
+        circle_marker_571c84ab5d2d72c90cc9a0357ac07cd6.bindPopup(popup_fb9dc3c46d8158c7db22c2c5daa986ef)
+        ;
+
+        
+    
+    
+            var circle_marker_671bf89d5a703f6e26d70c3aed22e097 = L.circleMarker(
+                [42.315407, 43.356892],
+                {"bubblingMouseEvents": true, "color": "#00AA00", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#00AA00", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.9, "radius": 10.763599752756125, "stroke": true, "weight": 2}
+            ).addTo(map_3b05846e82c4232a6b443695d2ed9e0a);
+        
+    
+        var popup_9cedd0565d75713389181cc925446de0 = L.popup({
+  "maxWidth": 280,
+});
+
+        
+            
+                var html_ab7d08f2e3b23806a9c2b63b271eb83b = $(`<div id="html_ab7d08f2e3b23806a9c2b63b271eb83b" style="width: 100.0%; height: 100.0%;">     <b>Abkhazia, Batumi</b><br>     Score: 95.27 / 100<br>     Precio: €21,581<br>     Riesgo: bajo<br>     <a href="https://realting.com/property-for-sale/georgia/atlas-property/1694779" target="_blank">Ver propiedad →</a>     </div>`)[0];
+                popup_9cedd0565d75713389181cc925446de0.setContent(html_ab7d08f2e3b23806a9c2b63b271eb83b);
+            
+        
+
+        circle_marker_671bf89d5a703f6e26d70c3aed22e097.bindPopup(popup_9cedd0565d75713389181cc925446de0)
+        ;
+
+        
+    
+    
+            var circle_marker_0df94c0ea0b7d18ffa0536fabb1f255c = L.circleMarker(
+                [42.315407, 43.356892],
+                {"bubblingMouseEvents": true, "color": "#00AA00", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#00AA00", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.9, "radius": 10.763589622974672, "stroke": true, "weight": 2}
+            ).addTo(map_3b05846e82c4232a6b443695d2ed9e0a);
+        
+    
+        var popup_24f05d6ff7bf73a5b0d0f62f9ba68dfd = L.popup({
+  "maxWidth": 280,
+});
+
+        
+            
+                var html_ada06ad2902e3c0818309a1d46f626db = $(`<div id="html_ada06ad2902e3c0818309a1d46f626db" style="width: 100.0%; height: 100.0%;">     <b>Abkhazia, Batumi</b><br>     Score: 95.27 / 100<br>     Precio: €21,725<br>     Riesgo: bajo<br>     <a href="https://realting.com/property-for-sale/georgia/atlas-property/1688323" target="_blank">Ver propiedad →</a>     </div>`)[0];
+                popup_24f05d6ff7bf73a5b0d0f62f9ba68dfd.setContent(html_ada06ad2902e3c0818309a1d46f626db);
+            
+        
+
+        circle_marker_0df94c0ea0b7d18ffa0536fabb1f255c.bindPopup(popup_24f05d6ff7bf73a5b0d0f62f9ba68dfd)
+        ;
+
+        
+    
+    
+            var circle_marker_953e21b4e028654da7b3f90031c391eb = L.circleMarker(
+                [42.315407, 43.356892],
+                {"bubblingMouseEvents": true, "color": "#00AA00", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#00AA00", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.9, "radius": 10.76356152100032, "stroke": true, "weight": 2}
+            ).addTo(map_3b05846e82c4232a6b443695d2ed9e0a);
+        
+    
+        var popup_c93938609067171f21b89cce5d16d250 = L.popup({
+  "maxWidth": 280,
+});
+
+        
+            
+                var html_50898431a9b110071bd2bc72feacc955 = $(`<div id="html_50898431a9b110071bd2bc72feacc955" style="width: 100.0%; height: 100.0%;">     <b>Abkhazia, Batumi</b><br>     Score: 95.27 / 100<br>     Precio: €22,125<br>     Riesgo: bajo<br>     <a href="https://realting.com/property-for-sale/georgia/recom/1765750" target="_blank">Ver propiedad →</a>     </div>`)[0];
+                popup_c93938609067171f21b89cce5d16d250.setContent(html_50898431a9b110071bd2bc72feacc955);
+            
+        
+
+        circle_marker_953e21b4e028654da7b3f90031c391eb.bindPopup(popup_c93938609067171f21b89cce5d16d250)
+        ;
+
+        
+    
+    
+            var circle_marker_7e3eeee2602272b8e0154c5ea32d62a9 = L.circleMarker(
+                [42.315407, 43.356892],
+                {"bubblingMouseEvents": true, "color": "#00AA00", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#00AA00", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.9, "radius": 10.763557599794595, "stroke": true, "weight": 2}
+            ).addTo(map_3b05846e82c4232a6b443695d2ed9e0a);
+        
+    
+        var popup_aa03acab69023ff191eb9860f8064469 = L.popup({
+  "maxWidth": 280,
+});
+
+        
+            
+                var html_b6c45b134c3f66fa2fe75e1e44c200b7 = $(`<div id="html_b6c45b134c3f66fa2fe75e1e44c200b7" style="width: 100.0%; height: 100.0%;">     <b>Abkhazia, Batumi</b><br>     Score: 95.27 / 100<br>     Precio: €22,180<br>     Riesgo: bajo<br>     <a href="https://realting.com/property-for-sale/georgia/atlas-property/1612382" target="_blank">Ver propiedad →</a>     </div>`)[0];
+                popup_aa03acab69023ff191eb9860f8064469.setContent(html_b6c45b134c3f66fa2fe75e1e44c200b7);
+            
+        
+
+        circle_marker_7e3eeee2602272b8e0154c5ea32d62a9.bindPopup(popup_aa03acab69023ff191eb9860f8064469)
+        ;
+
+        
+    
+    
+            var circle_marker_f360912e60721cc60d63f5d1f58531be = L.circleMarker(
+                [42.315407, 43.356892],
+                {"bubblingMouseEvents": true, "color": "#00AA00", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#00AA00", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.9, "radius": 10.763555639191733, "stroke": true, "weight": 2}
+            ).addTo(map_3b05846e82c4232a6b443695d2ed9e0a);
+        
+    
+        var popup_3007e54a574840e1ed1e43c8b4e441d5 = L.popup({
+  "maxWidth": 280,
+});
+
+        
+            
+                var html_12bd66d95e8fd0961468f86c9eacc3bd = $(`<div id="html_12bd66d95e8fd0961468f86c9eacc3bd" style="width: 100.0%; height: 100.0%;">     <b>Abkhazia, Batumi</b><br>     Score: 95.27 / 100<br>     Precio: €22,208<br>     Riesgo: bajo<br>     <a href="https://realting.com/property-for-sale/georgia/recom/1741580" target="_blank">Ver propiedad →</a>     </div>`)[0];
+                popup_3007e54a574840e1ed1e43c8b4e441d5.setContent(html_12bd66d95e8fd0961468f86c9eacc3bd);
+            
+        
+
+        circle_marker_f360912e60721cc60d63f5d1f58531be.bindPopup(popup_3007e54a574840e1ed1e43c8b4e441d5)
+        ;
+
+        
+    
+    
+            var circle_marker_dc64acff0b566ff6ee41f4e738485369 = L.circleMarker(
+                [42.315407, 43.356892],
+                {"bubblingMouseEvents": true, "color": "#00AA00", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#00AA00", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.9, "radius": 10.763544202341706, "stroke": true, "weight": 2}
+            ).addTo(map_3b05846e82c4232a6b443695d2ed9e0a);
+        
+    
+        var popup_224142a168df8f45060928b2f9f62a46 = L.popup({
+  "maxWidth": 280,
+});
+
+        
+            
+                var html_0c47ec3a7f7dd235c1dd58f26f8c9771 = $(`<div id="html_0c47ec3a7f7dd235c1dd58f26f8c9771" style="width: 100.0%; height: 100.0%;">     <b>Abkhazia, Batumi</b><br>     Score: 95.27 / 100<br>     Precio: €22,371<br>     Riesgo: bajo<br>     <a href="https://realting.com/property-for-sale/georgia/atlas-property/1694785" target="_blank">Ver propiedad →</a>     </div>`)[0];
+                popup_224142a168df8f45060928b2f9f62a46.setContent(html_0c47ec3a7f7dd235c1dd58f26f8c9771);
+            
+        
+
+        circle_marker_dc64acff0b566ff6ee41f4e738485369.bindPopup(popup_224142a168df8f45060928b2f9f62a46)
+        ;
+
+        
+    
+    
+            var circle_marker_ae30c0f8189d718e9aa4760df8420d24 = L.circleMarker(
+                [42.315407, 43.356892],
+                {"bubblingMouseEvents": true, "color": "#00AA00", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#00AA00", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.9, "radius": 10.763544136988276, "stroke": true, "weight": 2}
+            ).addTo(map_3b05846e82c4232a6b443695d2ed9e0a);
+        
+    
+        var popup_26b0e1466cfa83d20b06575b1acffee2 = L.popup({
+  "maxWidth": 280,
+});
+
+        
+            
+                var html_bd206ac0baab573cf3c3da644ddb6093 = $(`<div id="html_bd206ac0baab573cf3c3da644ddb6093" style="width: 100.0%; height: 100.0%;">     <b>Abkhazia, Batumi</b><br>     Score: 95.27 / 100<br>     Precio: €22,372<br>     Riesgo: bajo<br>     <a href="https://realting.com/property-for-sale/georgia/recom/1754880" target="_blank">Ver propiedad →</a>     </div>`)[0];
+                popup_26b0e1466cfa83d20b06575b1acffee2.setContent(html_bd206ac0baab573cf3c3da644ddb6093);
+            
+        
+
+        circle_marker_ae30c0f8189d718e9aa4760df8420d24.bindPopup(popup_26b0e1466cfa83d20b06575b1acffee2)
+        ;
+
+        
+    
+    
+            var circle_marker_0418592836617c5cace7d96dac17d871 = L.circleMarker(
+                [42.315407, 43.356892],
+                {"bubblingMouseEvents": true, "color": "#00AA00", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#00AA00", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.9, "radius": 10.763544136988276, "stroke": true, "weight": 2}
+            ).addTo(map_3b05846e82c4232a6b443695d2ed9e0a);
+        
+    
+        var popup_b326e420e2e9bb6a2a3b70f9b1785457 = L.popup({
+  "maxWidth": 280,
+});
+
+        
+            
+                var html_3e1bfdf3927c09a474050fdc5071ba74 = $(`<div id="html_3e1bfdf3927c09a474050fdc5071ba74" style="width: 100.0%; height: 100.0%;">     <b>Abkhazia, Batumi</b><br>     Score: 95.27 / 100<br>     Precio: €22,372<br>     Riesgo: bajo<br>     <a href="https://realting.com/property-for-sale/georgia/recom/1748496" target="_blank">Ver propiedad →</a>     </div>`)[0];
+                popup_b326e420e2e9bb6a2a3b70f9b1785457.setContent(html_3e1bfdf3927c09a474050fdc5071ba74);
+            
+        
+
+        circle_marker_0418592836617c5cace7d96dac17d871.bindPopup(popup_b326e420e2e9bb6a2a3b70f9b1785457)
+        ;
+
+        
+    
+    
+            var circle_marker_240b10fcc341ba57a1f2da35d0aeb07b = L.circleMarker(
+                [42.315407, 43.356892],
+                {"bubblingMouseEvents": true, "color": "#00AA00", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#00AA00", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.9, "radius": 10.763544136988276, "stroke": true, "weight": 2}
+            ).addTo(map_3b05846e82c4232a6b443695d2ed9e0a);
+        
+    
+        var popup_ff6f1f3520b8b2d000adcdee1688c501 = L.popup({
+  "maxWidth": 280,
+});
+
+        
+            
+                var html_d35639e59f1dfbd240e24c13f17069ac = $(`<div id="html_d35639e59f1dfbd240e24c13f17069ac" style="width: 100.0%; height: 100.0%;">     <b>Abkhazia, Batumi</b><br>     Score: 95.27 / 100<br>     Precio: €22,372<br>     Riesgo: bajo<br>     <a href="https://realting.com/property-for-sale/georgia/recom/1734894" target="_blank">Ver propiedad →</a>     </div>`)[0];
+                popup_ff6f1f3520b8b2d000adcdee1688c501.setContent(html_d35639e59f1dfbd240e24c13f17069ac);
+            
+        
+
+        circle_marker_240b10fcc341ba57a1f2da35d0aeb07b.bindPopup(popup_ff6f1f3520b8b2d000adcdee1688c501)
+        ;
+
+        
+    
+    
+            var circle_marker_56b0e20433ece2fdff8736474c44b665 = L.circleMarker(
+                [42.315407, 43.356892],
+                {"bubblingMouseEvents": true, "color": "#00AA00", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#00AA00", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.9, "radius": 10.763544136988276, "stroke": true, "weight": 2}
+            ).addTo(map_3b05846e82c4232a6b443695d2ed9e0a);
+        
+    
+        var popup_bb1a015e99263b1b533cf07d49203bfd = L.popup({
+  "maxWidth": 280,
+});
+
+        
+            
+                var html_74b60c14c04ff42b682a735025b1a794 = $(`<div id="html_74b60c14c04ff42b682a735025b1a794" style="width: 100.0%; height: 100.0%;">     <b>Abkhazia, Batumi</b><br>     Score: 95.27 / 100<br>     Precio: €22,372<br>     Riesgo: bajo<br>     <a href="https://realting.com/property-for-sale/georgia/recom/1766820" target="_blank">Ver propiedad →</a>     </div>`)[0];
+                popup_bb1a015e99263b1b533cf07d49203bfd.setContent(html_74b60c14c04ff42b682a735025b1a794);
+            
+        
+
+        circle_marker_56b0e20433ece2fdff8736474c44b665.bindPopup(popup_bb1a015e99263b1b533cf07d49203bfd)
+        ;
+
+        
+    
+    
+            var circle_marker_2392b12c1cfb6a125e8a26470a3d504b = L.circleMarker(
+                [42.315407, 43.356892],
+                {"bubblingMouseEvents": true, "color": "#00AA00", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#00AA00", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 0.9, "radius": 10.763529759233956, "stroke": true, "weight": 2}
+            ).addTo(map_3b05846e82c4232a6b443695d2ed9e0a);
+        
+    
+        var popup_6cb1d101766389e6d80becfa420f215d = L.popup({
+  "maxWidth": 280,
+});
+
+        
+            
+                var html_dc8c2bccc41630017f15f4f23a571b6c = $(`<div id="html_dc8c2bccc41630017f15f4f23a571b6c" style="width: 100.0%; height: 100.0%;">     <b>Abkhazia, Batumi</b><br>     Score: 95.27 / 100<br>     Precio: €22,577<br>     Riesgo: bajo<br>     <a href="https://realting.com/property-for-sale/georgia/recom/1744339" target="_blank">Ver propiedad →</a>     </div>`)[0];
+                popup_6cb1d101766389e6d80becfa420f215d.setContent(html_dc8c2bccc41630017f15f4f23a571b6c);
+            
+        
+
+        circle_marker_2392b12c1cfb6a125e8a26470a3d504b.bindPopup(popup_6cb1d101766389e6d80becfa420f215d)
+        ;
+
+        
+    
+</script>
+</html>

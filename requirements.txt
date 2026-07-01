@@ -7,3 +7,4 @@ folium
 openpyxl
 jupyter
 geopy
+streamlit
