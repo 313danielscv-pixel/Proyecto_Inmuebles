@@ -198,6 +198,7 @@ def build_workframe(df: pd.DataFrame) -> pd.DataFrame:
     work["has_legal_url"] = work.get("leyes_de_ocupacion_url", pd.Series(index=work.index, dtype="object")).notna().astype(float)
     work["score_legal"] = (0.75 * work["riesgo_norm"] + 0.15 * work["has_legal_comment"] + 0.10 * work["has_legal_url"]).clip(0.0, 1.0)
     work["score_legal_pct"] = work["score_legal"] * 100.0
+    work["score_location_pct"] = work["score_location"] * 100.0
 
     work["score_rent"] = minmax(work["rent_eur_month_num"])
 
@@ -564,7 +565,7 @@ def page_1(top20: pd.DataFrame, base: pd.DataFrame) -> None:
         "leyes_de_ocupacion_comentario",
         "leyes_de_ocupacion_url",
         "score_legal_pct",
-        "score_location",
+        "score_location_pct",
         "score_oportunidad",
         "payback_years",
         "url",
@@ -581,8 +582,8 @@ def page_1(top20: pd.DataFrame, base: pd.DataFrame) -> None:
             "url": st.column_config.LinkColumn("Enlace inmueble"),
             "leyes_de_ocupacion_url": st.column_config.LinkColumn("Ley / fuente"),
             "score_legal_pct": st.column_config.NumberColumn("score_legal_%", format="%.0f%%"),
-            "score_location": st.column_config.NumberColumn("score_location", format="%.2f"),
-            "score_oportunidad": st.column_config.NumberColumn("score_oportunidad", format="%.2f"),
+            "score_location_pct": st.column_config.NumberColumn("score_location_%", format="%.0f%%"),
+            "score_oportunidad": st.column_config.NumberColumn("score_oportunidad_%", format="%.0f%%"),
             "payback_years": st.column_config.NumberColumn("payback_years", format="%.1f"),
         },
     )
