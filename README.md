@@ -766,14 +766,3 @@ Se abre automáticamente en `http://localhost:8501`
 - Página 2: zoom a un país (2-3 minutos)
 - Si quieres más detalle: abre la URL real
 
-## El punto de vista del usuario final
-
-Cuando un inversor abre este dashboard, vive 3 emociones:
-
-**Primero:** "¡Wow, es bonito y entiendo todo en 30 segundos!"
-
-**Segundo:** "Espera, ¿Portugal tiene 7.2 de score? Pensaba que era mejor... veo que es por el riesgo legal (score 65%)"
-
-**Tercero:** "Entiendo. Este sistema no me dice 'invierte', me dice 'estos son los datos, TÚ decides'"
-
-Eso es lo que queremos lograr. No vender. Informar.
